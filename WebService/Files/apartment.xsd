@@ -1,0 +1,15 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Apartment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="idapartment" type="xs:int"/>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="bedrooms" type="xs:int"/>
+        <xs:element name="bathrooms" type="xs:int"/>
+        <xs:element name="cansleepmax" type="xs:int"/>
+        <xs:element name="from" type="xs:dateTime"/>
+        <xs:element name="to" type="xs:dateTime"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
