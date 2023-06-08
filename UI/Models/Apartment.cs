@@ -10,6 +10,16 @@ namespace UI.Models
     {
         [XmlElement("apartment")]
         public List<Apartment> Apartments { get; set; }
+
+        public ApartmentList()
+        {
+            Apartments = new List<Apartment>(); 
+        }
+
+        public ApartmentList(List<Apartment> apartments)
+        {
+                Apartments = apartments;
+        }
     }
 
     public class Apartment
