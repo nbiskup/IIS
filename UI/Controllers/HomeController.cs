@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -57,8 +58,12 @@ namespace UI.Controllers
         [HttpPost]
         public async Task<ActionResult> XSD(IFormFile file)
         {
+            //var files = Request.Form;
+            //file = f.Get("file");
+
             if (file != null && file.Length > 0)
             {
+                //file = files[0];
                 var client = _clientFactory.CreateClient();
                 var content = new MultipartFormDataContent();
                 content.Add(new StreamContent(file.OpenReadStream())
@@ -83,6 +88,11 @@ namespace UI.Controllers
 
                 ViewBag.xml = valid;
             }
+            else 
+            {
+                ViewBag.xml = "Select a file!";
+            }
+            
 
             return View();
         }
