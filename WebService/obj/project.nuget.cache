@@ -1,14 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "334AK9zOpnJDUhyUVI7QFa1I9tiJMNjHmvTzRGiMYm9oEPLWmwyjg5d7hWuYv48QGdgyaqio4VLs+MqNLTM2gg==",
+  "dgSpecHash": "KSXZz/BJ9AI6Pg8mlOLUpHcGzcFBl8KzQcA6VYjvqEHznf5vDPpzVUWiFSUGlWjzvydD682WmbQ03YCxjdtImg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nikola\\Desktop\\Algebra\\Treca_godina\\SestSemestar\\IIS\\IIS_project\\WebService\\WebService\\WebService\\WebService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Nikola\\.nuget\\packages\\relaxng\\3.2.3\\relaxng.3.2.3.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\restsharp\\110.2.0\\restsharp.110.2.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'RelaxNG 3.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "RelaxNG",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

@@ -7,7 +7,7 @@ namespace WebService.DAL
 {
     public class ApartmentRepository : IRepository<Apartment>
     {
-        private const string API = "http://localhost:5078/apartment";
+        private const string API = "http://localhost:5078/apartment/AsXmlDocument";
 
         public List<Apartment> apartments;
 

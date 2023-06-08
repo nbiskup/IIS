@@ -3,34 +3,67 @@ using System.Xml.Serialization;
 
 namespace WebService.Models
 {
+    [XmlRoot("apartments")]
+    public class ApartmentList
+    {
+        [XmlElement("apartment")]
+        public List<Apartment> Apartments { get; set; }
+    }
+
     public class Apartment
     {
         [XmlElement("idApartment")]
+        [JsonProperty(PropertyName = "idapartment")]
         public int IDApartment { get; set; }
 
         [XmlElement("name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string? Name { get; set; }
 
         [XmlElement("bedrooms")]
+        [JsonProperty(PropertyName = "bedrooms")]
         public int Bedrooms { get; set; }
 
         [XmlElement("bathrooms")]
+        [JsonProperty(PropertyName = "bathrooms")]
         public int Bathrooms { get; set; }
 
         [XmlElement("canSleepMax")]
+        [JsonProperty(PropertyName = "cansleepmax")]
         public int CanSleepMax { get; set; }
 
         [XmlElement("from")]
-        public DateTime From { get; set; }
+        [JsonProperty(PropertyName = "from")]
+        public DateTime From
+        {
+            get { return from; }
+            set
+            {
+                from = value;
+                From_ShortDate = from.ToShortDateString();
+            }
+        }
+        private DateTime from;
 
         [XmlElement("from_ShortDate")]
-        public string From_ShortDate { get; set; }
+        public string? From_ShortDate { get; set; }
 
         [XmlElement("to")]
-        public DateTime To { get; set; }
+        [JsonProperty(PropertyName = "to")]
+        public DateTime To
+        {
+            get { return to; }
+            set
+            {
+                to = value;
+                To_ShortDate = to.ToShortDateString();
+            }
+        }
+
+        private DateTime to;
 
         [XmlElement("to_ShortDate")]
-        public string To_ShortDate { get; set; }
+        public string? To_ShortDate { get; set; }
 
     }
 }
