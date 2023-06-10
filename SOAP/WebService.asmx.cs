@@ -32,8 +32,8 @@ namespace SOAP
 
             IEnumerable<XElement> result = xElement.XPathSelectElements($"//apartment[idApartment='{query}']");
 
-            XElement recipes = new XElement("Apartment", result);
-            recipes.Save(filePath);
+            XElement apartments = new XElement("Apartment", result);
+            apartments.Save(filePath);            
 
             StringBuilder sb = new StringBuilder();
             result.ToList().ForEach(e => sb.Append(e));
