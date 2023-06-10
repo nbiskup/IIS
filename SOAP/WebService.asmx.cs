@@ -28,7 +28,7 @@ namespace SOAP
         {
             XElement xElement = Generate.GenerateXML();
 
-            string filePath = @"C:\Users\Nikola\apartments.xml";
+            string filePath = @"C:\Users\Nikola\apartmentsSOAP.xml";
 
             IEnumerable<XElement> result = xElement.XPathSelectElements($"//apartment[idApartment='{query}']");
 

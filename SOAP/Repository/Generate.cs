@@ -42,18 +42,21 @@ namespace SOAP.Repository
                    Bathrooms = 3,
                    Bedrooms = 4,
                    CanSleepMax = 7,
-                   To = new System.DateTime(2023-05-11),
+                   From = new System.DateTime(2023, 05, 09),
                    From_ShortDate = "09/05/2023",
+                   To = new System.DateTime(2023, 05, 11),
                    To_ShortDate = "11/05/2023"
                },
                new Apartment
                {
                    IDApartment = 2,
-                   Name = "Apartment Bili Biser",
+                   Name = "Apartment A1",
                    Bathrooms = 2,
                    Bedrooms = 1,
                    CanSleepMax = 4,
+                   From = new System.DateTime(2023, 07, 05),
                    From_ShortDate = "05/07/2023",
+                   To = new System.DateTime(2023, 07, 12),
                    To_ShortDate = "12/07/2023"
                },
                new Apartment
@@ -63,8 +66,10 @@ namespace SOAP.Repository
                    Bathrooms = 3,
                    Bedrooms = 3,
                    CanSleepMax = 6,
-                   From_ShortDate = "10/06/2023",
-                   To_ShortDate = "24/06/2023"
+                   From = new System.DateTime(2023, 06, 07),
+                   From_ShortDate = "07/06/2023",
+                   To = new System.DateTime(2023, 06, 21),
+                   To_ShortDate = "21/06/2023"
                }
            };
 
