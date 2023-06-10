@@ -20,10 +20,7 @@ namespace SOAP
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-        private List<Apartment> apartments = Generate.GetApartment();
-
         [WebMethod]
-
         public string Search(string query)
         {
             XElement xElement = Generate.GenerateXML();
