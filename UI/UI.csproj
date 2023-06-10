@@ -308,6 +308,7 @@
     <Content Include="Views\Home\Xsd.cshtml" />
     <Content Include="Views\Home\Rng.cshtml" />
     <Content Include="Views\Home\API.cshtml" />
+    <Content Include="Views\Home\Soap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

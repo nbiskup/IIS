@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Xml.Serialization;
 using Commons.Xml.Relaxng;
 using System.Xml.Linq;
+using SOAPReference;
+using System.Net;
+using System.Text;
 
 namespace WebService.Controllers
 {
@@ -13,15 +16,19 @@ namespace WebService.Controllers
     [ApiController]
     public class ApartmentController : ControllerBase
     {
+        private readonly IRepository<Apartment> _repository;
         private IList<Apartment> _apartments;
 
-        public ApartmentController(IRepository<Apartment> repository)
+        public ApartmentController()
         {
-            //_repository = repository;
-            //_apartments = _repository.GetAll().Result.ToList();
-            _apartments = new List<Apartment>();
-            loadApartments();
-        }         
+            
+        }
+
+        //public ApartmentController(IRepository<Apartment> repository)
+        //{
+        //    _apartments = new List<Apartment>();
+        //    loadApartments();
+        //}         
 
         private void loadApartments()
         {
@@ -47,11 +54,19 @@ namespace WebService.Controllers
             }
         }
 
+        [HttpGet("Welcome")]
+        public async Task<IActionResult> GetAllApartments()
+        {            
+            return Ok("WELCOME TO CORE PROJECT!");
+        }
+
         [HttpPost("XSD")]
-        public async Task<IActionResult> XSD(IFormFile file)
-        {
-            if (file == null || file.Length == 0)
+        public async Task<IActionResult> XSD(IFormCollection files)
+        {   
+            if (files.Files == null || files.Files.Count == 0)
                 return BadRequest("File not found!");
+
+            var file = files.Files[0];
 
             var schemaSet = new XmlSchemaSet();
             using (var fileStream = System.IO.File.OpenRead("./Files/apartmentXSD.xsd"))
@@ -78,24 +93,26 @@ namespace WebService.Controllers
             });
 
             if (!xmlValid)
-                return BadRequest(validationErrorMessage);
+               return BadRequest(validationErrorMessage);
 
             var root = Utils.XmlValidation.XmlDeserializer<ApartmentList>(document);
 
             if (root == null)
                 return BadRequest("Error: Object is not deserialized.");
 
-            root.Apartments.ForEach(a => _apartments.Add(a));
-            SaveApartments();
+            //root.Apartments.ForEach(a => _apartments.Add(a));
+            //SaveApartments();
 
             return Ok(root.Apartments);
         }
 
         [HttpPost("RNG")]
-        public async Task<IActionResult> RNG(IFormFile file)
+        public async Task<IActionResult> RNG(IFormCollection files)
         {
-            if (file == null || file.Length == 0)
+            if (files.Files == null || files.Files.Count == 0)
                 return BadRequest("File not found!");
+
+            var file = files.Files[0];
 
             XmlDocument document = new XmlDocument();
             using (var memoryStream = new MemoryStream())
@@ -131,8 +148,8 @@ namespace WebService.Controllers
             if (root == null)
                 return BadRequest("Error: Object is not deserialized.");
 
-            root.Apartments.ForEach(a => _apartments.Add(a));
-            SaveApartments();
+            //root.Apartments.ForEach(a => _apartments.Add(a));
+            //SaveApartments();
 
             return Ok(root.Apartments);
         }
@@ -145,5 +162,46 @@ namespace WebService.Controllers
             serialiser.Serialize(filestream, _apartments);
             filestream.Close();
         }
+
+        //[HttpGet("SOAP")]
+        //public string RatingCheck(string rating)
+        //{
+        //    WebServiceSoapClient client = new WebServiceSoapClient(WebServiceSoapClient.EndpointConfiguration.WebServiceSoap);
+        //    return client.Search
+        //}
+
+        [HttpGet("SOAP")]
+        public string GetApartmentById(string id)
+        {
+            var url = "http://localhost:51321/WebService.asmx/Search";
+            var postData = "query=2";
+
+            var webRequest = WebRequest.Create(url);
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+
+            var dataBytes = Encoding.UTF8.GetBytes(postData);
+            webRequest.ContentLength = dataBytes.Length;
+
+
+
+            using (var requestStream = webRequest.GetRequestStream())
+            {
+                requestStream.Write(dataBytes, 0, dataBytes.Length);
+            }
+
+
+
+            using (var response = webRequest.GetResponse())
+            {
+                using (var rd = new StreamReader(response.GetResponseStream()))
+                {
+                    var soapResult = rd.ReadToEnd();
+                    return soapResult.ToString();
+                }
+            }
+        }
+
+
     }
 }

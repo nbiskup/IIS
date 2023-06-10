@@ -1,0 +1,24 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:51321/WebService.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, SOAPReference"
+    ],
+    "references": [
+      "Commons.Xml.Relaxng, {RelaxNG, 3.2.3}",
+      "Newtonsoft.Json, {Newtonsoft.Json, 13.0.3}",
+      "RestSharp, {RestSharp, 110.2.0}",
+      "System.Runtime.CompilerServices.Unsafe, {System.Runtime.CompilerServices.Unsafe, 6.0.0}",
+      "System.Text.Encodings.Web, {System.Text.Encodings.Web, 7.0.0}",
+      "System.Text.Json, {System.Text.Json, 7.0.2}"
+    ],
+    "targetFramework": "net6.0",
+    "typeReuseMode": "All"
+  }
+}

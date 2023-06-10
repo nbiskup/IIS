@@ -1,30 +1,49 @@
-<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" ns="" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <rng:start combine="choice">
-    <rng:ref name="Apartment"/>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+             datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <rng:start>
+    <rng:ref name="apartments"/>
   </rng:start>
-  <rng:define name="Apartment">
+
+  <rng:define name="apartments">
+    <rng:element name="apartments">
+      <rng:oneOrMore>
+        <rng:ref name="apartment"/>
+      </rng:oneOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="apartment">
     <rng:element name="apartment">
       <rng:element name="idApartment">
-        <rng:data type="int"/>
+        <rng:data type="integer"/>
       </rng:element>
       <rng:element name="name">
         <rng:data type="string"/>
       </rng:element>
       <rng:element name="bedrooms">
-        <rng:data type="int"/>
+        <rng:data type="integer"/>
       </rng:element>
       <rng:element name="bathrooms">
-        <rng:data type="int"/>
+        <rng:data type="integer"/>
       </rng:element>
       <rng:element name="canSleepMax">
-        <rng:data type="int"/>
+        <rng:data type="integer"/>
       </rng:element>
       <rng:element name="from">
         <rng:data type="dateTime"/>
       </rng:element>
+      <rng:element name="from_ShortDate">
+        <rng:data type="string"/>
+      </rng:element>
       <rng:element name="to">
         <rng:data type="dateTime"/>
       </rng:element>
+      <rng:element name="to_ShortDate">
+        <rng:data type="string"/>
+      </rng:element>
     </rng:element>
   </rng:define>
+
 </rng:grammar>

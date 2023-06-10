@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using UI.Models;
+using FormCollection = System.Web.Mvc.FormCollection;
 
 namespace UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly ILogger<HomeController> _logger;
-
         public ActionResult Index()
         {
             return View();
@@ -26,6 +23,11 @@ namespace UI.Controllers
         }
 
         public ActionResult Rng()
+        {
+            return View();
+        }
+
+        public ActionResult Soap()
         {
             return View();
         }
@@ -56,45 +58,117 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> XSD(IFormFile file)
+        public async Task<ActionResult> XSD()
         {
-            //var files = Request.Form;
-            //file = f.Get("file");
+            var files = Request.Files;
 
-            if (file != null && file.Length > 0)
+            if (files != null && files.Count > 0)
             {
-                //file = files[0];
-                var client = _clientFactory.CreateClient();
-                var content = new MultipartFormDataContent();
-                content.Add(new StreamContent(file.OpenReadStream())
+                using (HttpClient client = new HttpClient())
                 {
-                    Headers =
+                    var file = files[0];
+
+                    var content = new MultipartFormDataContent();
+                    content.Add(new StreamContent(file.InputStream)
                     {
-                        ContentLength = file.Length,
-                        ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType)
-                    }
-                }, "File", file.FileName);
+                        Headers =
+                        {
+                            ContentLength = file.ContentLength,
+                            ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType)
+                        }
+                    }, "File", file.FileName);
 
-                var response = await client.PostAsync("http://localhost:5223/api/Apartment/XSD", content);
+                    var response = await client.PostAsync("http://localhost:5223/api/Apartment/XSD", content);
 
-                string message_response = "";
+                    string message_response = "";
+
+                    if (response.IsSuccessStatusCode)
+                        message_response = "good";
+                    else
+                        message_response = "not valid!";
+
+                    string valid = $"XML is {message_response}";
+
+                    ViewBag.xml = valid;
+                }
                 
-                if (response.IsSuccessStatusCode)
-                    message_response = "good";
-                else
-                    message_response = "not valid!";
-
-                string valid = $"XML is {message_response}";
-
-                ViewBag.xml = valid;
             }
             else 
             {
                 ViewBag.xml = "Select a file!";
-            }
-            
+            }            
 
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RNG()
+        {
+            var files = Request.Files;
+
+            if (files != null && files.Count > 0)
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var file = files[0];
+
+                    var content = new MultipartFormDataContent();
+                    content.Add(new StreamContent(file.InputStream)
+                    {
+                        Headers =
+                        {
+                            ContentLength = file.ContentLength,
+                            ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType)
+                        }
+                    }, "File", file.FileName);
+
+                    var response = await client.PostAsync("http://localhost:5223/api/Apartment/RNG", content);
+
+                    string message_response = "";
+
+                    if (response.IsSuccessStatusCode)
+                        message_response = "good";
+                    else
+                        message_response = "not valid!";
+
+                    string valid = $"XML is {message_response}";
+
+                    ViewBag.xml = valid;
+                }
+
+            }
+            else
+            {
+                ViewBag.xml = "Select a file!";
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SOAP(FormCollection f)
+        {
+            var id = f.Get("id");
+            var url = "http://localhost:51321/WebService.asmx/Search";
+            var contentData = $"query={id}";
+
+            using (var httpClient = new HttpClient())
+            {
+                var content = new StringContent(contentData, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                using (var response = await httpClient.PostAsync(url, content))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var soapResult = await response.Content.ReadAsStringAsync();
+
+                    var apartments = JsonConvert.DeserializeObject<List<Apartment>>(soapResult);
+                    var apartmentList = new ApartmentList(apartments);
+
+                    ViewData["apartments"] = apartmentList;
+
+                    return View();
+                }
+            }
         }
 
     }

@@ -6,33 +6,43 @@ namespace WebService.Models
     [XmlRoot("apartments")]
     public class ApartmentList
     {
-        [XmlElement("apartment")]
+        [XmlElement(ElementName = "apartment")]
         public List<Apartment> Apartments { get; set; }
-    }
 
+        public ApartmentList()
+        {
+            Apartments = new List<Apartment>();
+        }
+
+        public ApartmentList(List<Apartment> apartments)
+        {
+            Apartments = apartments;
+        }
+    }
+    
     public class Apartment
     {
-        [XmlElement("idApartment")]
+        [XmlElement(ElementName = "idApartment")]
         [JsonProperty(PropertyName = "idapartment")]
         public int IDApartment { get; set; }
 
-        [XmlElement("name")]
+        [XmlElement(ElementName = "name")]
         [JsonProperty(PropertyName = "name")]
         public string? Name { get; set; }
 
-        [XmlElement("bedrooms")]
+        [XmlElement(ElementName = "bedrooms")]
         [JsonProperty(PropertyName = "bedrooms")]
         public int Bedrooms { get; set; }
 
-        [XmlElement("bathrooms")]
+        [XmlElement(ElementName = "bathrooms")]
         [JsonProperty(PropertyName = "bathrooms")]
         public int Bathrooms { get; set; }
 
-        [XmlElement("canSleepMax")]
+        [XmlElement(ElementName = "canSleepMax")]
         [JsonProperty(PropertyName = "cansleepmax")]
         public int CanSleepMax { get; set; }
 
-        [XmlElement("from")]
+        [XmlElement(ElementName = "from")]
         [JsonProperty(PropertyName = "from")]
         public DateTime From
         {
@@ -45,10 +55,10 @@ namespace WebService.Models
         }
         private DateTime from;
 
-        [XmlElement("from_ShortDate")]
+        [XmlElement(ElementName = "from_ShortDate")]
         public string? From_ShortDate { get; set; }
 
-        [XmlElement("to")]
+        [XmlElement(ElementName = "to")]
         [JsonProperty(PropertyName = "to")]
         public DateTime To
         {
@@ -62,7 +72,7 @@ namespace WebService.Models
 
         private DateTime to;
 
-        [XmlElement("to_ShortDate")]
+        [XmlElement(ElementName = "to_ShortDate")]
         public string? To_ShortDate { get; set; }
 
     }

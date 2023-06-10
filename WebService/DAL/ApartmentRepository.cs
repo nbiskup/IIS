@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
+using System.Xml.Serialization;
 using WebService.Interfaces;
 using WebService.Models;
 
@@ -20,6 +21,21 @@ namespace WebService.DAL
             apartments = JsonConvert.DeserializeObject<List<Apartment>>(apiResult.Content);
 
             return apartments;
+        }
+
+        public async Task<IList<Apartment>> GetAllXml()
+        {
+            var client = new RestClient(API);
+            var request = new RestRequest();
+
+            var apiResult = client.Execute(request);
+
+            var serializer = new XmlSerializer(typeof(List<Apartment>));
+            using (var reader = new StringReader(apiResult.Content))
+            {
+                var apartments = (List<Apartment>)serializer.Deserialize(reader);
+                return apartments;
+            }
         }
 
         public Apartment GetById(int id)

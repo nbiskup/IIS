@@ -396,3 +396,14 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/JAXB/nbproject/private/
+/JAXB/build/
+/WetherServer/nbproject/private/
+/WeatherServer/nbproject/private/
+/CustomWeatherToolsHandler/nbproject/private/
+/WeatherClient/nbproject/private/
+/WeatherServer/build/
+/WeatherClient/build/
+/WetherClient/nbproject/private/
+/WetherServer/build/
+/WetherClient/build/

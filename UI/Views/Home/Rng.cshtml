@@ -1,7 +1,10 @@
-﻿﻿<form method="post" asp-action="RNG">
+﻿<form method="post" asp-action="RNG" enctype="multipart/form-data">
     <h1>Select XML file to validate with RNG</h1>
-    <input type="file" accept="xml" id="file" name="file" />
-    <button class="btn btn-primary " type="submit">SUBMIT</button>
+    <br />
+    <input type="file" id="file" name="file" />
+    <br>
+    <br>
+    <button class="btn btn-primary d-block" type="submit">SUBMIT</button>
 </form>
 <br />
 <h3>@ViewBag.xml</h3>
