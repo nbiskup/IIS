@@ -1,7 +1,6 @@
-﻿using SOAP.Modals;
-using SOAP.Repository;
-using System;
+﻿using SOAP.Repository;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Services;
@@ -25,7 +24,9 @@ namespace SOAP
         {
             XElement xElement = Generate.GenerateXML();
 
-            string filePath = @"C:\Users\Nikola\apartmentsSOAP.xml";
+            string fileName = "apartmentsSOAP.xml";
+            string folderPath = Server.MapPath("~/Utils");
+            string filePath = Path.Combine(folderPath, fileName);
 
             IEnumerable<XElement> result = xElement.XPathSelectElements($"//apartment[idApartment='{query}']");
 

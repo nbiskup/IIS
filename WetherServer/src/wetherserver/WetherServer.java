@@ -24,7 +24,7 @@ public class WetherServer {
      */
     public static void main(String[] args) throws IOException, XmlRpcException {
         System.out.println("Creating server ...");
-        WebServer server = new WebServer(8080);
+        WebServer server = new WebServer(8090);
 
         XmlRpcServer xmlServer = server.getXmlRpcServer();
         PropertyHandlerMapping phm = new PropertyHandlerMapping();

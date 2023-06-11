@@ -1,9 +1,7 @@
 ﻿using System.Xml;
 using System.Xml.Schema;
 using WebService.Models;
-using WebService.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Xml.Serialization;
 using Commons.Xml.Relaxng;
 using System.Xml.Linq;
 using SOAPReference;
@@ -16,7 +14,6 @@ namespace WebService.Controllers
     [ApiController]
     public class ApartmentController : ControllerBase
     {
-        private readonly IRepository<Apartment> _repository;
         private IList<Apartment> _apartments;
 
         public ApartmentController()
@@ -24,38 +21,8 @@ namespace WebService.Controllers
             
         }
 
-        //public ApartmentController(IRepository<Apartment> repository)
-        //{
-        //    _apartments = new List<Apartment>();
-        //    loadApartments();
-        //}         
-
-        private void loadApartments()
-        {
-            try
-            {
-                using (var reader = new StreamReader(@"C:\Users\Nikola\apartments.xml"))
-                {
-                    if (string.IsNullOrWhiteSpace(reader.ReadToEnd())) 
-                        return;
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(ApartmentList));
-                    var apartments = (ApartmentList)serializer.Deserialize(reader);
-
-                    if (apartments == null)
-                        return;
-
-                    apartments.Apartments.ForEach(a => _apartments.Add(a));                        
-                }
-            }
-            catch (Exception)
-            {
-                        
-            }
-        }
-
         [HttpGet("Welcome")]
-        public async Task<IActionResult> GetAllApartments()
+        public async Task<IActionResult> Index()
         {            
             return Ok("WELCOME TO CORE PROJECT!");
         }
@@ -99,9 +66,6 @@ namespace WebService.Controllers
 
             if (root == null)
                 return BadRequest("Error: Object is not deserialized.");
-
-            //root.Apartments.ForEach(a => _apartments.Add(a));
-            //SaveApartments();
 
             return Ok(root.Apartments);
         }
@@ -147,28 +111,9 @@ namespace WebService.Controllers
 
             if (root == null)
                 return BadRequest("Error: Object is not deserialized.");
-
-            //root.Apartments.ForEach(a => _apartments.Add(a));
-            //SaveApartments();
-
+                        
             return Ok(root.Apartments);
-        }
-
-        private void SaveApartments()
-        {
-            XmlSerializer serialiser = new XmlSerializer(typeof(ApartmentList));
-            TextWriter filestream = new StreamWriter(@"C:\Users\Nikola\apartments.xml");
-
-            serialiser.Serialize(filestream, _apartments);
-            filestream.Close();
-        }
-
-        //[HttpGet("SOAP")]
-        //public string RatingCheck(string rating)
-        //{
-        //    WebServiceSoapClient client = new WebServiceSoapClient(WebServiceSoapClient.EndpointConfiguration.WebServiceSoap);
-        //    return client.Search
-        //}
+        }        
 
         [HttpGet("SOAP")]
         public string GetApartmentById(string id)
@@ -183,14 +128,10 @@ namespace WebService.Controllers
             var dataBytes = Encoding.UTF8.GetBytes(postData);
             webRequest.ContentLength = dataBytes.Length;
 
-
-
             using (var requestStream = webRequest.GetRequestStream())
             {
                 requestStream.Write(dataBytes, 0, dataBytes.Length);
             }
-
-
 
             using (var response = webRequest.GetResponse())
             {

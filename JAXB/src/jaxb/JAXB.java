@@ -35,7 +35,6 @@ public static void main(String[] args)throws SAXException {
             // Create JAXB context for the generated classes
             JAXBContext jaxbContext = JAXBContext.newInstance("generated"); 
 
-            // Create an unmarshaller
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller(); 
 
             // Create a schema factory

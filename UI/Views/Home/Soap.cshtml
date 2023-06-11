@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "SOAP";
-    var apartments = (UI.Models.ApartmentList)ViewData["apartments"] ?? new UI.Models.ApartmentList();
+    var apartments = (string)ViewData["apartments"] ?? "";
 }
 
 <h2>SOAP</h2>
@@ -12,59 +12,9 @@
     <button class="btn btn-primary " type="submit">SUBMIT</button>
 </form>
 
-@if (apartments.Apartments != null && apartments.Apartments.Count > 0)
+@if (!string.IsNullOrWhiteSpace(apartments))
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IDApartment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bedrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bathrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CanSleepMax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.From_ShortDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.To_ShortDate)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in apartments.Apartments)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDApartment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bedrooms)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bathrooms)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CanSleepMax)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From_ShortDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To_ShortDate)
-                </td>
-            </tr>
-        }
-    </table>
+    <h4>
+        @apartments
+    </h4>
 }

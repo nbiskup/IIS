@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -160,11 +159,8 @@ namespace UI.Controllers
                 {
                     response.EnsureSuccessStatusCode();
                     var soapResult = await response.Content.ReadAsStringAsync();
-
-                    var apartments = JsonConvert.DeserializeObject<List<Apartment>>(soapResult);
-                    var apartmentList = new ApartmentList(apartments);
-
-                    ViewData["apartments"] = apartmentList;
+                                       
+                    ViewData["apartments"] = soapResult;
 
                     return View();
                 }

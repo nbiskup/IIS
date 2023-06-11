@@ -407,3 +407,4 @@ FodyWeavers.xsd
 /WetherClient/nbproject/private/
 /WetherServer/build/
 /WetherClient/build/
+/JAXB/dist/

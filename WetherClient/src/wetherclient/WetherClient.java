@@ -26,17 +26,13 @@ public class WetherClient {
         try {
             // Connecting RPC jar service and server
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-            config.setServerURL(new URL("http://localhost:8080"));
+            config.setServerURL(new URL("http://localhost:8090"));
             config.setEnabledForExceptions(true);
             config.setContentLengthOptional(false);
-            config.setEnabledForExtensions(true);
-
- 
+            config.setEnabledForExtensions(true); 
 
             XmlRpcClient client = new XmlRpcClient();
-            client.setConfig(config);
-
- 
+            client.setConfig(config); 
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             boolean loop = true;
@@ -47,16 +43,12 @@ public class WetherClient {
                 Object[] parameters = new Object[]{inputString};
                 System.out.println(client.execute("WeatherTools.get", parameters));
 
- 
-
                 System.out.println("Dalje? 1:0");
                 int option = Integer.parseInt(scanner.nextLine());
                 if (option == 0) {
                     loop = false;
                 }
-            } while (loop);
-
- 
+            } while (loop); 
 
         } catch (MalformedURLException | XmlRpcException ex) {
         }

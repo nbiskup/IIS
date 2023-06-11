@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Apartment>
+  <apartment>
+    <idApartment>1</idApartment>
+    <name>Vila Kirel</name>
+    <bedrooms>4</bedrooms>
+    <bathrooms>3</bathrooms>
+    <canSleepMax>7</canSleepMax>
+    <from>2023-05-09T00:00:00</from>
+    <from_ShortDate>09/05/2023</from_ShortDate>
+    <to>2023-05-11T00:00:00</to>
+    <to_ShortDate>11/05/2023</to_ShortDate>
+  </apartment>
+</Apartment>

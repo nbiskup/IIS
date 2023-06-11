@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1JFndec37LwFuF4lLpNAeFN0pWvE3xgbhTHBe1QvlPkcxDBFQJZfB6A/YFTVAoAvvYJd6cdIv3rUMtz/DT7o1A==",
+  "dgSpecHash": "mFj1nLVLLm6MNtzBteR5S5Vbl3QgcX1ZyNM8dfzScy3cPwEqxyZsqWmxGt9OIa8/GXPnehaGLHYxtyNyIF9Qdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\Algebra\\Treca_godina\\SestSemestar\\IIS\\IIS_project\\WebService\\WebService\\WebService\\WebService.csproj",
+  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\Algebra\\Treca-godina\\Sesti_semestar\\IIS\\WebService\\WebService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
